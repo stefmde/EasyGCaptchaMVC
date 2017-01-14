@@ -1,0 +1,36 @@
+﻿@using EasyGCaptchaMVC
+@model EasyGCaptchaMVC.Demo.Models.IndexViewModel
+
+<h1>EasyGCaptchaMVC Demo</h1>
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new {@id = "contact-form", role = "form"}))
+{
+	<h2>Protected form</h2>
+	@Html.LabelFor(x => x.ContactViewModel.Name, "Name") <br />
+	@Html.TextBoxFor(x => x.ContactViewModel.Name)
+
+	<br /><br />
+
+	@Html.LabelFor(x => x.ContactViewModel.Message, "Message")	<br />
+	@Html.TextBoxFor(x => x.ContactViewModel.Message)
+
+	<br />
+
+	@Html.GenerateCaptcha(publicKey: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+	<br />
+
+	<button type="submit">Send</button>
+}
+
+<br />
+
+@if (Model.EasyGCaptchaResult != null)
+{
+	<h2>Result</h2>
+
+	@:State: @Model.EasyGCaptchaResult.Success <br />
+	@:Time: @Model.EasyGCaptchaResult.Date.ToString() <br />
+	@:Hostname: @Model.EasyGCaptchaResult.Hostname
+}
