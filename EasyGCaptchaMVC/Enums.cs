@@ -16,7 +16,7 @@ namespace EasyGCaptchaMVC
 	}
 
 	/// <summary>
-	/// The type of CAPTCHA to serve. Default: Image
+	/// The type of CAPTCHA to serve. Seams unsupported by google. Default: Image
 	/// </summary>
 	public enum Type
 	{

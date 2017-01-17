@@ -11,7 +11,13 @@ namespace EasyGCaptchaMVC
 {
 	public static class Extensions
 	{
-		public static MvcHtmlString GenerateCaptcha(this HtmlHelper helper, string publicKey = null,
+		public static MvcHtmlString EasyGCaptchaGenerateCaptcha(this HtmlHelper helper, EasyGCaptchaSettings settings)
+		{
+			return helper.EasyGCaptchaGenerateCaptcha(settings.PublicKey, settings.DivID, settings.Theme, settings.Size, settings.Type,
+				settings.Tabindex, settings.Callback);
+		}
+
+		public static MvcHtmlString EasyGCaptchaGenerateCaptcha(this HtmlHelper helper, string publicKey = null,
 													string divID = "EasyGCaptchaMVC_div", Theme theme = Theme.Light,
 													Size size = Size.Normal, Type type = Type.Image, int tabindex = -1,
 													string callBack = null)

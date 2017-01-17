@@ -28,7 +28,7 @@ namespace EasyGCaptchaMVC
 		public string Hostname { get; internal set; }
 
 		/// <summary>
-		/// Optional error codes
+		/// Optional error codes. Not tested.
 		/// </summary>
 		[JsonProperty(PropertyName = "error-codes")]
 		public List<GErrorCodes> GErrorCodes { get; internal set; }
