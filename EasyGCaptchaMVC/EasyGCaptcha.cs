@@ -16,8 +16,45 @@ namespace EasyGCaptchaMVC
 {
 	public class EasyGCaptcha : ActionFilterAttribute
 	{
+		/// <summary>
+		/// Contains the public or website key, provides by Google. Default: empty/not set
+		/// </summary>
+		public string PublicKey { get; set; }
+
+		/// <summary>
+		/// Contains the private key, provides by Google. Default: empty/not set
+		/// </summary>
 		public string PrivateKey { get; set; }
-		public bool PassRemoteIPToGoogle { get; set; }
+
+		/// <summary>
+		/// Prevents the module from throwing exceptions. But can hide errors if 'ShowErrorMessageOnDebug' is false. Default: false
+		/// </summary>
+		public bool DisableExceptions { get; set; } = false;
+
+		/// <summary>
+		/// Forces the debug mode. Should be false on prduction. Default: false
+		/// </summary>
+		public bool ForceDebugMode { get; set; } = false;
+
+		/// <summary>
+		/// Forces release mode. For testing only. Default: false
+		/// </summary>
+		public bool ForceReleaseMode { get; set; } = false;
+
+		/// <summary>
+		/// Uses special keys, provided by Google, to show the module but always passthru it. Only for testing. Default: true
+		/// </summary>
+		public bool UsePassthruInDebugMode { get; set; } = true;
+
+		/// <summary>
+		/// Passes the ip of the client ip to Google. Don't know for what. Default: false
+		/// </summary>
+		public bool PassRemoteIPToGoogle { get; set; } = false;
+
+		/// <summary>
+		/// The EasyGCaptchaSettings-Object
+		/// </summary>
+		public EasyGCaptchaSettings EasyGCaptchaSettings { get; set; } = null;
 
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{

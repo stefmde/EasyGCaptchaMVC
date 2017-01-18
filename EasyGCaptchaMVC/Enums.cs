@@ -16,7 +16,7 @@ namespace EasyGCaptchaMVC
 	}
 
 	/// <summary>
-	/// The type of CAPTCHA to serve. Default: Image
+	/// The type of CAPTCHA to serve. Seams unsupported by google. Default: Image
 	/// </summary>
 	public enum Type
 	{
@@ -57,5 +57,15 @@ namespace EasyGCaptchaMVC
 		/// The response parameter is invalid or malformed.
 		/// </summary>
 		InvalidInputResponse
+	}
+
+	/// <summary>
+	/// Internaly used to get the environment type
+	/// </summary>
+	internal enum EnvironmentSetting
+	{
+		Unknown,
+		Debug,
+		Release
 	}
 }

@@ -1,4 +1,5 @@
 ﻿@using EasyGCaptchaMVC
+@using Type = EasyGCaptchaMVC.Type
 @model EasyGCaptchaMVC.Demo.Models.IndexViewModel
 
 <h1>EasyGCaptchaMVC Demo</h1>
@@ -17,9 +18,9 @@
 
 	<br />
 
-	@Html.GenerateCaptcha(publicKey: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+	@Html.EasyGCaptchaGenerateCaptcha()
 
-	<br />
+	<br /><br />
 
 	<button type="submit">Send</button>
 }
