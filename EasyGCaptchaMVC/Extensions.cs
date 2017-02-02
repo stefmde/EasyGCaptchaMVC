@@ -27,7 +27,7 @@ namespace EasyGCaptchaMVC
 		/// <param name="forceDebugMode">Forces the debug mode. Should be false on prduction</param>
 		/// <param name="forceReleaseMode">Forces release mode. For testing only</param>
 		/// <param name="usePassthruInDebugMode">Uses special keys, provided by Google, to show the module but always passthru it. Only for testing.</param>
-		/// <param name="ShowErrorMessagesOnDebug">Can be enabled to show error messages from the extension on the website if the site is in debug mode</param>
+		/// <param name="showErrorMessagesOnDebug">Can be enabled to show error messages from the extension on the website if the site is in debug mode</param>
 		/// <param name="disableExceptions">Prevents the module from throwing exceptions. But can hide errors if 'ShowErrorMessageOnDebug' is false</param>
 		/// <returns>Outputs raw html to the cshtml-Page</returns>
 		public static MvcHtmlString EasyGCaptchaGenerateCaptcha(this HtmlHelper helper, string publicKey = null,
@@ -35,7 +35,7 @@ namespace EasyGCaptchaMVC
 													Size size = Size.Normal, Type type = Type.Image, int tabindex = -1,
 													string callBack = null, bool forceDebugMode = false,
 													bool forceReleaseMode = false, bool usePassthruInDebugMode = true,
-													bool ShowErrorMessagesOnDebug = true, bool disableExceptions = false)
+													bool showErrorMessagesOnDebug = true, bool disableExceptions = false)
 		{
 
 			string pubKey = string.Empty;

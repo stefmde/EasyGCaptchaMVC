@@ -23,10 +23,14 @@ namespace EasyGCaptchaMVC.Demo.Controllers
 		}
 
 		[HttpPost]
-		[EasyGCaptcha(Order = 1)]
-		public ActionResult Index(IndexViewModel model, EasyGCaptchaResult EasyGCaptchaResult)
+		[EasyGCaptcha(PrivateKey = "xyzxyzxyz...xyzxyzxyz")]
+		public ActionResult Index(IndexViewModel model, EasyGCaptchaResult easyGCaptchaResult)
 		{
-			model.EasyGCaptchaResult = EasyGCaptchaResult;
+			if (easyGCaptchaResult.Success)
+			{
+				// Do your work here
+			}
+			model.EasyGCaptchaResult = easyGCaptchaResult;
 			return View(model);
 		}
 	}

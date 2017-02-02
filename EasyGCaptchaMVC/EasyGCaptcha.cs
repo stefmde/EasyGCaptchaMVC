@@ -49,10 +49,10 @@ namespace EasyGCaptchaMVC
 		/// </summary>
 		public bool PassRemoteIPToGoogle { get; set; } = false;
 
-		/// <summary>
-		/// The EasyGCaptchaSettings-Object
-		/// </summary>
-		public EasyGCaptchaSettings EasyGCaptchaSettings { get; set; } = null;
+		///// <summary>
+		///// The EasyGCaptchaSettings-Object
+		///// </summary>
+		//public EasyGCaptchaSettings EasyGCaptchaSettings { get; set; } = null;
 
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
@@ -122,7 +122,7 @@ namespace EasyGCaptchaMVC
 
 			if (filterContext.ActionParameters.ContainsKey("easyGCaptchaResult"))
 			{
-				filterContext.ActionParameters["EasyGCaptchaResult"] = result;
+				filterContext.ActionParameters["easyGCaptchaResult"] = result;
 			}
 			else
 			{
