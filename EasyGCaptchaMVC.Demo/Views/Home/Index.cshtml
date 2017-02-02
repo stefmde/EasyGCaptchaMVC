@@ -1,7 +1,6 @@
 ﻿@using EasyGCaptchaMVC
 @using Type = EasyGCaptchaMVC.Type
 @model EasyGCaptchaMVC.Demo.Models.IndexViewModel
-
 <h1>EasyGCaptchaMVC Demo</h1>
 
 
@@ -16,9 +15,9 @@
 	@Html.LabelFor(x => x.ContactViewModel.Message, "Message")	<br />
 	@Html.TextBoxFor(x => x.ContactViewModel.Message)
 
-	<br />
+	<br /><br />
 
-	@Html.EasyGCaptchaGenerateCaptcha()
+	@Html.EasyGCaptchaGenerateCaptcha(theme: Theme.Dark)
 
 	<br /><br />
 

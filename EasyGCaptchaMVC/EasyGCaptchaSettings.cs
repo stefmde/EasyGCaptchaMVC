@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EasyGCaptchaMVC
 {
+	/// <summary>
+	/// Do not use. Preimplementation.
+	/// </summary>
 	public class EasyGCaptchaSettings
 	{
 		/// <summary>

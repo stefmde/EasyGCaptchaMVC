@@ -12,18 +12,6 @@ namespace EasyGCaptchaMVC
 {
 	public static class Extensions
 	{
-		/// <summary>
-		/// Renders the Google ReCaptcha with the EasyGCaptchaSettings-Object
-		/// </summary>
-		/// <param name="helper">MVC Extension</param>
-		/// <param name="settings">The EasyGCaptchaSettings-Object</param>
-		/// <returns>Outputs raw html to the cshtml-Page</returns>
-		public static MvcHtmlString EasyGCaptchaGenerateCaptcha(this HtmlHelper helper, EasyGCaptchaSettings settings)
-		{
-			return helper.EasyGCaptchaGenerateCaptcha(settings.PublicKey, settings.DivID, settings.Theme, settings.Size, settings.Type,
-				settings.Tabindex, settings.Callback, settings.ForceDebugMode, settings.ForceReleaseMode,
-				settings.UsePassthruInDebugMode, settings.ShowErrorMessagesOnDebug, settings.DisableExceptions);
-		}
 
 		/// <summary>
 		/// Renders the Google ReCaptcha with the single EasyGCaptcha settings
@@ -45,10 +33,11 @@ namespace EasyGCaptchaMVC
 		public static MvcHtmlString EasyGCaptchaGenerateCaptcha(this HtmlHelper helper, string publicKey = null,
 													string divID = "EasyGCaptchaMVC_div", Theme theme = Theme.Light,
 													Size size = Size.Normal, Type type = Type.Image, int tabindex = -1,
-													string callBack = null, bool forceDebugMode = false, 
+													string callBack = null, bool forceDebugMode = false,
 													bool forceReleaseMode = false, bool usePassthruInDebugMode = true,
 													bool ShowErrorMessagesOnDebug = true, bool disableExceptions = false)
 		{
+
 			string pubKey = string.Empty;
 			string tab = string.Empty;
 			string call = string.Empty;
@@ -56,13 +45,12 @@ namespace EasyGCaptchaMVC
 			string errorMessage = string.Empty;
 			bool errorOccoured = false;
 
-
 			// Try get public key from parameter or appsettings
 			if (environmentSetting == EnvironmentSetting.Debug && usePassthruInDebugMode)
 			{
-				pubKey = "";
+				pubKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 			}
-			else if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["EasyGCaptchaMVC.PublicKey"]))
+			else if (ConfigurationManager.AppSettings.AllKeys.Contains("EasyGCaptchaMVC.PublicKey") && !string.IsNullOrEmpty(ConfigurationManager.AppSettings["EasyGCaptchaMVC.PublicKey"]))
 			{
 				pubKey = ConfigurationManager.AppSettings["EasyGCaptchaMVC.PublicKey"];
 			}
@@ -76,6 +64,7 @@ namespace EasyGCaptchaMVC
 				if (disableExceptions)
 				{
 					errorMessage = tempMessage;
+					errorOccoured = true;
 				}
 				else
 				{
@@ -92,7 +81,6 @@ namespace EasyGCaptchaMVC
 			{
 				call = ", 'callback' : '" + callBack + "'";
 			}
-
 
 			StringBuilder templateBuilder = new StringBuilder();
 			templateBuilder.Append(Environment.NewLine);
@@ -132,7 +120,7 @@ namespace EasyGCaptchaMVC
 				templateBuilder.Append("<script src='https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit'></script>");
 				templateBuilder.Append(Environment.NewLine);
 			}
-			
+
 			templateBuilder.Append("<!-- EasyGCaptchaMVC Section end -->");
 			templateBuilder.Append(Environment.NewLine);
 

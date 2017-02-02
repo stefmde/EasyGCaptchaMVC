@@ -14,13 +14,11 @@ using Newtonsoft.Json.Linq;
 
 namespace EasyGCaptchaMVC
 {
+	// Settings Priority: Webconfig, parm, settingsobject
+
+
 	public class EasyGCaptcha : ActionFilterAttribute
 	{
-		/// <summary>
-		/// Contains the public or website key, provides by Google. Default: empty/not set
-		/// </summary>
-		public string PublicKey { get; set; }
-
 		/// <summary>
 		/// Contains the private key, provides by Google. Default: empty/not set
 		/// </summary>
@@ -60,6 +58,9 @@ namespace EasyGCaptchaMVC
 		{
 			string userIP = string.Empty;
 			string privateKey = string.Empty;
+			EnvironmentSetting environmentSetting = Helper.GetEnvironmentSetting(ForceDebugMode, ForceReleaseMode);
+			string errorMessage = string.Empty;
+			bool errorOccoured = false;
 
 			if (PassRemoteIPToGoogle)
 			{
@@ -67,7 +68,11 @@ namespace EasyGCaptchaMVC
 			}
 
 			// Try get private key from config or parameter
-			if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["EasyGCaptchaMVC.PrivateKey"]))
+			if (environmentSetting == EnvironmentSetting.Debug && UsePassthruInDebugMode)
+			{
+				privateKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+			}
+			else if (ConfigurationManager.AppSettings.AllKeys.Contains("EasyGCaptchaMVC.PrivateKey") && !string.IsNullOrEmpty(ConfigurationManager.AppSettings["EasyGCaptchaMVC.PrivateKey"]))
 			{
 				privateKey = ConfigurationManager.AppSettings["EasyGCaptchaMVC.PrivateKey"];
 			}
@@ -77,7 +82,13 @@ namespace EasyGCaptchaMVC
 			}
 			else
 			{
-				throw new InvalidKeyException("EasyGCaptchaMVC.PrivateKey missing from appSettings or parameter");
+				const string temp = "EasyGCaptchaMVC.PrivateKey missing from appSettings or parameter";
+				if (DisableExceptions)
+				{
+					errorMessage = temp;
+				}
+
+				throw new InvalidKeyException(temp);
 			}
 
 			string postData = string.Format("&secret={0}&response={1}&remoteip={2}",
@@ -98,28 +109,29 @@ namespace EasyGCaptchaMVC
 
 			// Get the response
 			WebResponse response = request.GetResponse();
-
+			string responseFromServer;
 			using (dataStream = response.GetResponseStream())
 			{
 				using (StreamReader reader = new StreamReader(dataStream))
 				{
-					string responseFromServer = reader.ReadToEnd();
-					EasyGCaptchaResult result = JsonConvert.DeserializeObject<EasyGCaptchaResult>(responseFromServer);
-
-					if (filterContext.ActionParameters.ContainsKey("easyGCaptchaResult"))
-					{
-						filterContext.ActionParameters["EasyGCaptchaResult"] = result;
-					}
-					else
-					{
-						throw new MissingActionParameterException("Action have to contan a parameter of type EasyGCaptchaResult with name easyGCaptchaResult");
-					}
-
-					if (!result.Success)
-					{
-						((Controller)filterContext.Controller).ModelState.AddModelError("EasyGCaptchaMVC", "Captcha incorrect");
-					}
+					responseFromServer = reader.ReadToEnd();
 				}
+			}
+
+			EasyGCaptchaResult result = JsonConvert.DeserializeObject<EasyGCaptchaResult>(responseFromServer);
+
+			if (filterContext.ActionParameters.ContainsKey("easyGCaptchaResult"))
+			{
+				filterContext.ActionParameters["EasyGCaptchaResult"] = result;
+			}
+			else
+			{
+				throw new MissingActionParameterException("Action have to contan a parameter of type EasyGCaptchaResult with name easyGCaptchaResult");
+			}
+
+			if (!result.Success)
+			{
+				((Controller)filterContext.Controller).ModelState.AddModelError("EasyGCaptchaMVC", "Captcha incorrect");
 			}
 		}
 	}

@@ -9,14 +9,21 @@ namespace EasyGCaptchaMVC.Demo.Controllers
 {
 	public class HomeController : Controller
 	{
+		public static EasyGCaptchaSettings captchaSettings = new EasyGCaptchaSettings();
+
 		[HttpGet]
 		public ActionResult Index()
 		{
+			captchaSettings.Theme = Theme.Dark;
+
+			IndexViewModel model = new IndexViewModel();
+			model.EasyGCaptchaSettings = captchaSettings;
+
 			return View(new IndexViewModel());
 		}
 
 		[HttpPost]
-		[EasyGCaptcha(PrivateKey = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
+		[EasyGCaptcha(Order = 1)]
 		public ActionResult Index(IndexViewModel model, EasyGCaptchaResult EasyGCaptchaResult)
 		{
 			model.EasyGCaptchaResult = EasyGCaptchaResult;
