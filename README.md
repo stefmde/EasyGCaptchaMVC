@@ -1,5 +1,6 @@
 #EasyGCaptchaMVC
 *Easy Google ReCaptcha wrapper for MVC*
+
 My try to make it easy to implement the google ReCaptcha service for a MVC Website.
 
 ---------------
