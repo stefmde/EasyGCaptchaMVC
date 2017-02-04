@@ -1,5 +1,6 @@
 #EasyGCaptchaMVC
 *Easy Google ReCaptcha wrapper for MVC*
+
 My try to make it easy to implement the google ReCaptcha service for a MVC Website.
 
 ---------------
@@ -8,9 +9,10 @@ My try to make it easy to implement the google ReCaptcha service for a MVC Websi
 
  1. Get the api key pair from google: https://www.google.com/recaptcha
  2. Check the sample/demo project on [GitHub](https://github.com/stefmde/EasyGCaptchaMVC "GitHub - EasyGCaptchaMVC")
- 3. Implementing the HTML-Extension `EasyGCaptchaGenerateCaptcha` in the view
- 4. Implementing the `ActionFilterAttribute` above the Action
- 5. Check the given `EasyGCaptchaResult` in the Action
+ 3. Download and install the Package from [nuget](https://www.nuget.org/packages/EasyGCaptchaMVC/ "nuget - EasyGCaptchaMVC")
+ 4. Implementing the HTML-Extension `EasyGCaptchaGenerateCaptcha` in the view
+ 5. Implementing the `ActionFilterAttribute` above the Action
+ 6. Check the given `EasyGCaptchaResult` in the Action
 
 ---------------
 
