@@ -9,28 +9,25 @@ namespace EasyGCaptchaMVC
 {
 	internal static class Helper
 	{
-		
+
 		internal static EnvironmentSetting GetEnvironmentSetting(bool forceDebugMode, bool forceReleaseMode)
 		{
 			EnvironmentSetting environmentSetting = EnvironmentSetting.Release;
 
-			if (forceDebugMode || forceReleaseMode)
+			if (forceDebugMode)
 			{
-				if (forceDebugMode)
-				{
-					environmentSetting = EnvironmentSetting.Debug;
-				}
+				environmentSetting = EnvironmentSetting.Debug;
 			}
-			else
+			else if (forceReleaseMode)
 			{
-				if (Debugger.IsAttached)
-				{
-					environmentSetting = EnvironmentSetting.Debug;
-				}
+				environmentSetting = EnvironmentSetting.Release;
+			}
+			else if (Debugger.IsAttached)
+			{
+				environmentSetting = EnvironmentSetting.Debug;
 			}
 
 			return environmentSetting;
 		}
-
 	}
 }
