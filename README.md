@@ -85,10 +85,7 @@ If you have done this you have to add the `EasyGCaptchaResult easyGCaptchaResult
   - Description: Prevents the module from throwing exceptions. But can hide errors if 'ShowErrorMessageOnDebug' is false
 
 
-
-
 ###Attribute
-
 - string `PrivateKey`
  - Default: Dev-Key from Google
  - Description: Contains the private key, provides by Google
@@ -107,3 +104,10 @@ If you have done this you have to add the `EasyGCaptchaResult easyGCaptchaResult
 - bool `PassRemoteIPToGoogle`
  - Default: `false`
  - Description: Passes the ip of the client ip to Google. Don't know for what
+
+
+###Web.config
+If you want to, you can add those two keys in your Web.config. If you do that, there is no more need to pass those keys to the extension or the Attribute:
+
+    <add key="EasyGCaptchaMVC.PublicKey" value="" />
+    <add key="EasyGCaptchaMVC.PrivateKey" value="" />
