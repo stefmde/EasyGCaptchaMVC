@@ -77,7 +77,7 @@ namespace EasyGCaptchaMVC
 	/// <summary>
 	/// Internaly used to get the environment type
 	/// </summary>
-	internal enum EnvironmentSetting
+	public  enum EnvironmentSetting
 	{
 		Unknown,
 		Debug,

@@ -76,6 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\GCaptchaSettingsProvider.cs" />
     <Compile Include="EasyGCaptcha.cs" />
     <Compile Include="EasyGCaptchaSettings.cs" />
     <Compile Include="Enums.cs" />
