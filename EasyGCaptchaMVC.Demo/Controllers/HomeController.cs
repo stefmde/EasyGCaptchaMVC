@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using EasyGCaptchaMVC.Configuration;
 using EasyGCaptchaMVC.Demo.Models;
+using EasyGCaptchaMVC.Model;
+using EasyGCaptchaMVC.Worker;
 
 namespace EasyGCaptchaMVC.Demo.Controllers
 {

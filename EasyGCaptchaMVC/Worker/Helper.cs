@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EasyGCaptchaMVC.Configuration;
-using EasyGCaptchaMVC.Exceptions;
+using EasyGCaptchaMVC.Model;
 
-namespace EasyGCaptchaMVC
+namespace EasyGCaptchaMVC.Worker
 {
 	internal static class Helper
 	{
 
-		internal static EnvironmentSetting GetEnvironmentSetting(bool forceDebugMode, bool forceReleaseMode)
+		internal static EnvironmentSetting GetEnvironmentSetting(ForcedConfigurationMode forcedConfigurationMode)
 		{
 			EnvironmentSetting environmentSetting = EnvironmentSetting.Release;
 
-			if (forceDebugMode)
+			if (forcedConfigurationMode == ForcedConfigurationMode.Debug)
 			{
 				environmentSetting = EnvironmentSetting.Debug;
 			}
-			else if (forceReleaseMode)
+			else if (forcedConfigurationMode == ForcedConfigurationMode.Release)
 			{
 				environmentSetting = EnvironmentSetting.Release;
 			}

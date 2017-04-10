@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using EasyGCaptchaMVC.Configuration;
 using EasyGCaptchaMVC.Exceptions;
+using EasyGCaptchaMVC.Model;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace EasyGCaptchaMVC
+namespace EasyGCaptchaMVC.Worker
 {
 	public class EasyGCaptcha : ActionFilterAttribute
 	{
@@ -29,7 +23,7 @@ namespace EasyGCaptchaMVC
 			string errorMessage = string.Empty;
 			bool errorOccoured = false;
 
-			if (GCaptchaSettingsProvider.Instance.PassRemoteIPToGoogle)
+			if (GCaptchaSettingsProvider.Instance.PassRemoteIpToGoogle)
 			{
 				userIP = filterContext.RequestContext.HttpContext.Request.UserHostAddress;
 			}

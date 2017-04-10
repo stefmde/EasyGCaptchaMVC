@@ -78,16 +78,15 @@
   <ItemGroup>
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\GCaptchaSettingsProvider.cs" />
-    <Compile Include="EasyGCaptcha.cs" />
-    <Compile Include="EasyGCaptchaSettings.cs" />
-    <Compile Include="Enums.cs" />
+    <Compile Include="Worker\EasyGCaptcha.cs" />
+    <Compile Include="Model\Enums.cs" />
     <Compile Include="Exceptions\InvalidEnvironmentSetting.cs" />
     <Compile Include="Exceptions\MissingActionParameterException.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Worker\Extensions.cs" />
     <Compile Include="Exceptions\InvalidKeyException.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="Worker\Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EasyGCaptchaResult.cs" />
+    <Compile Include="Model\EasyGCaptchaResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

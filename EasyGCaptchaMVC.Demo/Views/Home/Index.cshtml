@@ -1,5 +1,6 @@
 ﻿@using EasyGCaptchaMVC
-@using Type = EasyGCaptchaMVC.Type
+@using EasyGCaptchaMVC.Worker
+@using Type = EasyGCaptchaMVC.Model.Type
 @model EasyGCaptchaMVC.Demo.Models.IndexViewModel
 <h1>EasyGCaptchaMVC Demo</h1>
 
@@ -31,7 +32,7 @@
 	<h2>Result</h2>
 
 	@:State: @Model.EasyGCaptchaResult.Success <br />
-	@:Time: @Model.EasyGCaptchaResult.Date.ToString() <br />
+	@:Time: @Model.EasyGCaptchaResult.Date <br />
 	@:Hostname: @Model.EasyGCaptchaResult.Hostname <br />
 	@:Errors: @(Model.EasyGCaptchaResult.GErrorCodes == null ? "" : string.Join(", ", Model.EasyGCaptchaResult.GErrorCodes))
 }

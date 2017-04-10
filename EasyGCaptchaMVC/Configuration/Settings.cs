@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EasyGCaptchaMVC.Exceptions;
+using EasyGCaptchaMVC.Model;
+using EasyGCaptchaMVC.Worker;
+using Type = EasyGCaptchaMVC.Model.Type;
 
 namespace EasyGCaptchaMVC.Configuration
 {
@@ -45,12 +48,12 @@ namespace EasyGCaptchaMVC.Configuration
 		}
 
 		/// <summary>
-		/// Contains the id for the div which contains the module. Used for styling and things like that
+		/// Contains the id for the div which contains the module. Used for styling and things like that. Default: "EasyGCaptchaMVC"
 		/// </summary>
-		public string DivId { get; set; } = "EasyGCaptchaMVC_div";
+		public string DivId { get; set; } = "EasyGCaptchaMVC";
 
 		/// <summary>
-		/// Contains the theme setting, provided by Google
+		/// Contains the theme setting, provided by Google. Default: Light
 		/// </summary>
 		public Theme Theme { get; set; } = Theme.Light;
 
@@ -60,22 +63,22 @@ namespace EasyGCaptchaMVC.Configuration
 		public Size Size { get; set; } = Size.Normal;
 
 		/// <summary>
-		/// Contains the validation type setting, provided by Google
+		/// Contains the validation type setting, provided by Google. Default: Image
 		/// </summary>
 		public Type Type { get; set; } = Type.Image;
 
 		/// <summary>
-		/// Contains the tabindex for the form, provided by Google
+		/// Contains the tabindex for the form, provided by Google. Default: 0
 		/// </summary>
-		public int Tabindex { get; set; } = -1;
+		public int Tabindex { get; set; } = 0;
 
 		/// <summary>
-		/// Provides the ability to call a js function if the module is fully loaded, provided by Google
+		/// Provides the ability to call a js function if the module is fully loaded, provided by Google. Default: None
 		/// </summary>
-		public string CallBack { get; set; } = null;
+		public string CallBack { get; set; } = String.Empty;
 
 		/// <summary>
-		/// Can be enabled to show error messages from the extension on the website if the site is in debug mode
+		/// Can be enabled to show error messages from the extension on the website if the site is in debug mode. Default: true
 		/// </summary>
 		public bool ShowErrorMessagesOnDebug { get; set; } = true;
 
@@ -85,14 +88,9 @@ namespace EasyGCaptchaMVC.Configuration
 		public bool DisableExceptions { get; set; } = false;
 
 		/// <summary>
-		/// Forces the debug mode. Should be false on prduction. Default: false
+		/// Forces the debug/release mode. Should be None on prduction. Default: None
 		/// </summary>
-		public bool ForceDebugMode { get; set; } = false;
-
-		/// <summary>
-		/// Forces release mode. For testing only. Default: false
-		/// </summary>
-		public bool ForceReleaseMode { get; set; } = false;
+		public ForcedConfigurationMode ForcedConfigurationMode { get; set; } = ForcedConfigurationMode.None;
 
 		/// <summary>
 		/// Uses special keys, provided by Google, to show the module but always passthru it. Only for testing. Default: true
@@ -102,20 +100,22 @@ namespace EasyGCaptchaMVC.Configuration
 		/// <summary>
 		/// Passes the ip of the client ip to Google. Don't know for what. Default: false
 		/// </summary>
-		public bool PassRemoteIPToGoogle { get; set; } = false;
+		public bool PassRemoteIpToGoogle { get; set; } = false;
+
+		//public string SubmitButtonId { get; set; } = "submit";
 
 
 		public EnvironmentSetting EnvironmentSetting
 		{
 			get
 			{
-				if (ForceDebugMode && ForceReleaseMode)
+				if (ForcedConfigurationMode == ForcedConfigurationMode.Debug && ForcedConfigurationMode == ForcedConfigurationMode.Release)
 				{
 					return EnvironmentSetting.Unknown;
 				}
 				else
 				{
-					return Helper.GetEnvironmentSetting(ForceDebugMode, ForceReleaseMode);
+					return Helper.GetEnvironmentSetting(ForcedConfigurationMode);
 				}
 			}
 		}
