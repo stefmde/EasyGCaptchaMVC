@@ -2,12 +2,23 @@
 
 
 
+##2.0.0 (2017-04-XX)##
+###New###
+- Fully implemented the error codes
+
+###Fix###
+- Fixed forceDebugMode and forceReleaseMode overriding at the same time
+
+
+ ---
+
+
 ##1.0.0 (2017-02-04)##
 ###New###
 - First Release
 
 ###Fix###
- - 
+- 
 
 
  ---
@@ -18,4 +29,4 @@
 - Alpha release
 
 ###Fix###
- - 
+- 

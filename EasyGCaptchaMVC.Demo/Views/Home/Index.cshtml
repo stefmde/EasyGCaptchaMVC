@@ -17,7 +17,7 @@
 
 	<br /><br />
 
-	@Html.EasyGCaptchaGenerateCaptcha(publicKey: "xyzxyzxyz...xyzxyzxyz", theme: Theme.Dark, forceReleaseMode: true)
+	@Html.EasyGCaptchaGenerateCaptcha( theme: Theme.Dark, size: Size.Invisible)
 
 	<br /><br />
 
@@ -32,5 +32,6 @@
 
 	@:State: @Model.EasyGCaptchaResult.Success <br />
 	@:Time: @Model.EasyGCaptchaResult.Date.ToString() <br />
-	@:Hostname: @Model.EasyGCaptchaResult.Hostname
+	@:Hostname: @Model.EasyGCaptchaResult.Hostname <br />
+	@:Errors: @(Model.EasyGCaptchaResult.GErrorCodes == null ? "" : string.Join(", ", Model.EasyGCaptchaResult.GErrorCodes))
 }

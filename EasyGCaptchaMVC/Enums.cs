@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EasyGCaptchaMVC
 {
@@ -30,33 +33,45 @@ namespace EasyGCaptchaMVC
 	public enum Size
 	{
 		Normal,
-		Compact
+		Compact,
+		Invisible
 	}
 
 	/// <summary>
 	/// Error codes from google returned by webrequest
 	/// </summary>
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum GErrorCodes
 	{
 		/// <summary>
 		/// The secret parameter is missing.
 		/// </summary>
+		[EnumMember(Value = "missing-input-secret")]
 		MissingInputSecret,
 
 		/// <summary>
 		/// The secret parameter is invalid or malformed.
 		/// </summary>
+		[EnumMember(Value = "invalid-input-secret")]
 		InvalidInputSecret,
 
 		/// <summary>
 		/// The response parameter is missing.
 		/// </summary>
+		[EnumMember(Value = "missing-input-response")]
 		MissingInputResponse,
 
 		/// <summary>
 		/// The response parameter is invalid or malformed.
 		/// </summary>
-		InvalidInputResponse
+		[EnumMember(Value = "invalid-input-response")]
+		InvalidInputResponse,
+
+		/// <summary>
+		/// The request is invalid or malformed.
+		/// </summary>
+		[EnumMember(Value = "bad-request")]
+		BadRequest
 	}
 
 	/// <summary>

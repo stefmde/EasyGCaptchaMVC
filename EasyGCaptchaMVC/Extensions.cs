@@ -41,9 +41,28 @@ namespace EasyGCaptchaMVC
 			string pubKey = string.Empty;
 			string tab = string.Empty;
 			string call = string.Empty;
-			EnvironmentSetting environmentSetting = Helper.GetEnvironmentSetting(forceDebugMode, forceReleaseMode);
+			EnvironmentSetting environmentSetting = EnvironmentSetting.Unknown;
 			string errorMessage = string.Empty;
 			bool errorOccoured = false;
+
+			// Get Environment setting
+			if (forceDebugMode && forceReleaseMode)
+			{
+				string tempMessage = "EasyGCaptchaMVC forceDebugMode and forceReleaseMode can't be both true at the same time";
+				if (disableExceptions)
+				{
+					errorMessage = tempMessage;
+					errorOccoured = true;
+				}
+				else
+				{
+					throw new InvalidEnvironmentSetting(tempMessage);
+				}
+			}
+			else
+			{
+				environmentSetting = Helper.GetEnvironmentSetting(forceDebugMode, forceReleaseMode);
+			}
 
 			// Try get public key from parameter or appsettings
 			if (environmentSetting == EnvironmentSetting.Debug && usePassthruInDebugMode)

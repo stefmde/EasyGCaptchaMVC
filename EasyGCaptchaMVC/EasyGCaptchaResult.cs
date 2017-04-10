@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EasyGCaptchaMVC
 {
@@ -31,6 +32,7 @@ namespace EasyGCaptchaMVC
 		/// Optional error codes. Not tested.
 		/// </summary>
 		[JsonProperty(PropertyName = "error-codes")]
+		//[JsonConverter(typeof(StringEnumConverter))]
 		public List<GErrorCodes> GErrorCodes { get; internal set; }
 	}
 }
