@@ -2,8 +2,9 @@
 
 
 
-##2.0.0 (2017-04-XX)##
+##2.0.0 (2017-04-12)##
 ###New###
+- NOW SUPPORTING GOOGLE INVISIBLE CAPTCHAS
 - Fully implemented the error codes from google
 - Properties ForceDebugMode and ForceReleaseMode are now merged to property ForcedConfigurationMode
 - Reduced the posibility of exception by modifying properties and the use of more default values
