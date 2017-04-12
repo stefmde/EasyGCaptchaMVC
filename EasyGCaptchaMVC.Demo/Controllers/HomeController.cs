@@ -15,8 +15,8 @@ namespace EasyGCaptchaMVC.Demo.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			GCaptchaSettingsProvider.Instance.Theme = Theme.Dark;
-			GCaptchaSettingsProvider.Instance.Size = Size.Invisible;
+			GCaptchaSettingsProvider.Instance.Theme = Theme.Light;
+			GCaptchaSettingsProvider.Instance.Size = Size.Normal;
 
 			return View(new IndexViewModel());
 		}

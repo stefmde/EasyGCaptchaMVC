@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Web.Mvc;
@@ -11,17 +12,13 @@ namespace EasyGCaptchaMVC.Worker
 {
 	public class EasyGCaptcha : ActionFilterAttribute
 	{
-
 		///// <summary>
 		///// The EasyGCaptchaSettings-Object
 		///// </summary>
 		//public EasyGCaptchaSettings EasyGCaptchaSettings { get; set; } = null;
-
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
 			string userIP = string.Empty;
-			string errorMessage = string.Empty;
-			bool errorOccoured = false;
 
 			if (GCaptchaSettingsProvider.Instance.PassRemoteIpToGoogle)
 			{
@@ -36,22 +33,58 @@ namespace EasyGCaptchaMVC.Worker
 			byte[] postDataAsBytes = Encoding.UTF8.GetBytes(postData);
 
 			// Create web request
-			WebRequest request = WebRequest.Create("https://www.google.com/recaptcha/api/siteverify");
-			request.Method = "POST";
-			request.ContentType = "application/x-www-form-urlencoded";
-			request.ContentLength = postDataAsBytes.Length;
-			Stream dataStream = request.GetRequestStream();
-			dataStream.Write(postDataAsBytes, 0, postDataAsBytes.Length);
-			dataStream.Close();
+			WebRequest request;
+			Stream dataStream;
+			try
+			{
+				request = WebRequest.Create("https://www.google.com/recaptcha/api/siteverify");
+				request.Method = "POST";
+				request.ContentType = "application/x-www-form-urlencoded";
+				request.ContentLength = postDataAsBytes.Length;
+
+				dataStream = request.GetRequestStream();
+				dataStream.Write(postDataAsBytes, 0, postDataAsBytes.Length);
+				dataStream.Close();
+			}
+			catch (Exception)
+			{
+				if (GCaptchaSettingsProvider.Instance.DisableExceptions)
+				{
+					((Controller)filterContext.Controller).ModelState.AddModelError("EasyGCaptchaMVC", "Error on webrequest");
+					filterContext.ActionParameters["easyGCaptchaResult"] = new EasyGCaptchaResult();
+					return;
+				}
+				else
+				{
+					throw;
+				}
+			}
 
 			// Get the response
-			WebResponse response = request.GetResponse();
 			string responseFromServer;
-			using (dataStream = response.GetResponseStream())
+			try
 			{
-				using (StreamReader reader = new StreamReader(dataStream))
+				WebResponse response = request.GetResponse();
+
+				using (dataStream = response.GetResponseStream())
 				{
-					responseFromServer = reader.ReadToEnd();
+					using (StreamReader reader = new StreamReader(dataStream))
+					{
+						responseFromServer = reader.ReadToEnd();
+					}
+				}
+			}
+			catch (Exception)
+			{
+				if (GCaptchaSettingsProvider.Instance.DisableExceptions)
+				{
+					((Controller)filterContext.Controller).ModelState.AddModelError("EasyGCaptchaMVC", "Error on parsing webrequest");
+					filterContext.ActionParameters["easyGCaptchaResult"] = new EasyGCaptchaResult();
+					return;
+				}
+				else
+				{
+					throw;
 				}
 			}
 

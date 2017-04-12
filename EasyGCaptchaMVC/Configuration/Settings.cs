@@ -47,10 +47,22 @@ namespace EasyGCaptchaMVC.Configuration
 			set => _privateKey = value;
 		}
 
+		private string _divId = "EasyGCaptchaMVC";
+
 		/// <summary>
-		/// Contains the id for the div which contains the module. Used for styling and things like that. Default: "EasyGCaptchaMVC"
+		/// Contains the id for the div which contains the module. Used for styling and things like that. Can't be set to null or empty. Default: "EasyGCaptchaMVC"
 		/// </summary>
-		public string DivId { get; set; } = "EasyGCaptchaMVC";
+		public string DivId
+		{
+			get { return _divId; }
+			set
+			{
+				if (!string.IsNullOrEmpty(value))
+				{
+					_divId = value;
+				}
+			}
+		}
 
 		/// <summary>
 		/// Contains the theme setting, provided by Google. Default: Light
@@ -77,10 +89,10 @@ namespace EasyGCaptchaMVC.Configuration
 		/// </summary>
 		public string CallBack { get; set; } = String.Empty;
 
-		/// <summary>
-		/// Can be enabled to show error messages from the extension on the website if the site is in debug mode. Default: true
-		/// </summary>
-		public bool ShowErrorMessagesOnDebug { get; set; } = true;
+		///// <summary>
+		///// Can be enabled to show error messages from the extension on the website if the site is in debug mode. Default: true
+		///// </summary>
+		//public bool ShowErrorMessagesOnDebug { get; set; } = true;
 
 		/// <summary>
 		/// Prevents the module from throwing exceptions. But can hide errors if 'ShowErrorMessageOnDebug' is false. Default: false
@@ -102,22 +114,9 @@ namespace EasyGCaptchaMVC.Configuration
 		/// </summary>
 		public bool PassRemoteIpToGoogle { get; set; } = false;
 
-		//public string SubmitButtonId { get; set; } = "submit";
-
-
-		public EnvironmentSetting EnvironmentSetting
-		{
-			get
-			{
-				if (ForcedConfigurationMode == ForcedConfigurationMode.Debug && ForcedConfigurationMode == ForcedConfigurationMode.Release)
-				{
-					return EnvironmentSetting.Unknown;
-				}
-				else
-				{
-					return Helper.GetEnvironmentSetting(ForcedConfigurationMode);
-				}
-			}
-		}
+		/// <summary>
+		/// Shows the configuration mode in which the extension is running
+		/// </summary>
+		public EnvironmentSetting EnvironmentSetting => Helper.GetEnvironmentSetting(ForcedConfigurationMode);
 	}
 }

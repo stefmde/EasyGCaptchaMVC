@@ -4,7 +4,12 @@
 
 ##2.0.0 (2017-04-XX)##
 ###New###
-- Fully implemented the error codes
+- Fully implemented the error codes from google
+- Properties ForceDebugMode and ForceReleaseMode are now merged to property ForcedConfigurationMode
+- Reduced the posibility of exception by modifying properties and the use of more default values
+- New auto computed property EnvironmentSetting shows in which mode the extension runs
+- Removed property ShowErrorMessagesOnDebug
+- Errors while resolving the captcha lead now to exceptions or ModelState-Errors
 
 ###Fix###
 - Fixed forceDebugMode and forceReleaseMode overriding at the same time
