@@ -95,7 +95,7 @@ namespace EasyGCaptchaMVC.Configuration
 		//public bool ShowErrorMessagesOnDebug { get; set; } = true;
 
 		/// <summary>
-		/// Prevents the module from throwing exceptions. But can hide errors if 'ShowErrorMessageOnDebug' is false. Default: false
+		/// Prevents the module from throwing exceptions. Default: false
 		/// </summary>
 		public bool DisableExceptions { get; set; } = false;
 
