@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyGCaptchaMVC", "EasyGCaptchaMVC\EasyGCaptchaMVC.csproj", "{82F9AA64-B9F3-4672-AF82-FB39C56686CB}"
 EndProject
@@ -12,6 +12,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CHANGELOG = CHANGELOG
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Net 4.5", ".Net 4.5", "{769EFAAE-EBE9-4477-9223-BA4EF8C99647}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Net Core", ".Net Core", "{2359F7B1-061D-4A62-A195-A687EE67290F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyGCaptchaMVCCore", "EasyGCaptchaMVCCore\EasyGCaptchaMVCCore.csproj", "{5E8A79EE-EF91-4DE4-8975-00B36DC5DB71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyGCaptchaMVCCore.Demo", "EasyGCaptchaMVCCore.Demo\EasyGCaptchaMVCCore.Demo.csproj", "{0DB7189E-8520-4B25-A8F6-BD334DEA8D02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +35,22 @@ Global
 		{E3ED254A-43E2-4BB8-8E7C-2F20C6E0AF4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3ED254A-43E2-4BB8-8E7C-2F20C6E0AF4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3ED254A-43E2-4BB8-8E7C-2F20C6E0AF4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E8A79EE-EF91-4DE4-8975-00B36DC5DB71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8A79EE-EF91-4DE4-8975-00B36DC5DB71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8A79EE-EF91-4DE4-8975-00B36DC5DB71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8A79EE-EF91-4DE4-8975-00B36DC5DB71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DB7189E-8520-4B25-A8F6-BD334DEA8D02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB7189E-8520-4B25-A8F6-BD334DEA8D02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB7189E-8520-4B25-A8F6-BD334DEA8D02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB7189E-8520-4B25-A8F6-BD334DEA8D02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82F9AA64-B9F3-4672-AF82-FB39C56686CB} = {769EFAAE-EBE9-4477-9223-BA4EF8C99647}
+		{E3ED254A-43E2-4BB8-8E7C-2F20C6E0AF4F} = {769EFAAE-EBE9-4477-9223-BA4EF8C99647}
+		{5E8A79EE-EF91-4DE4-8975-00B36DC5DB71} = {2359F7B1-061D-4A62-A195-A687EE67290F}
+		{0DB7189E-8520-4B25-A8F6-BD334DEA8D02} = {2359F7B1-061D-4A62-A195-A687EE67290F}
 	EndGlobalSection
 EndGlobal

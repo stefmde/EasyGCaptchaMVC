@@ -1,0 +1,39 @@
+﻿@using EasyGCaptchaMVCCore
+@using EasyGCaptchaMVCCore.Worker
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Type = EasyGCaptchaMVCCore.Model.Type
+@model EasyGCaptchaMVCCore.Demo.Models.IndexViewModel
+<h1>EasyGCaptchaMVC Demo</h1>
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "contact-form", role = "form" }))
+{
+	<h2>Protected form</h2>
+	@Html.LabelFor(x => x.ContactViewModel.Name, "Name") <br />
+	@Html.TextBoxFor(x => x.ContactViewModel.Name)
+
+	<br /><br />
+
+	@Html.LabelFor(x => x.ContactViewModel.Message, "Message")	<br />
+	@Html.TextBoxFor(x => x.ContactViewModel.Message)
+
+	<br /><br />
+
+	@Html.EasyGCaptchaGenerateCaptcha()
+
+	<br /><br />
+
+	<button type="submit">Send</button>
+}
+
+<br />
+
+@if (Model.EasyGCaptchaResult != null)
+{
+	<h2>Result</h2>
+
+	@:State: @Model.EasyGCaptchaResult.Success <br />
+	@:Time: @Model.EasyGCaptchaResult.Date <br />
+	@:Hostname: @Model.EasyGCaptchaResult.Hostname <br />
+	@:Errors: @(Model.EasyGCaptchaResult.GErrorCodes == null ? "" : string.Join(", ", Model.EasyGCaptchaResult.GErrorCodes))
+}
